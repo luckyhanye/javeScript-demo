@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.showPic{
+			width: 720px;
+			height: 500px;
+			margin: 0 auto;
+			overflow: hidden;
+			position:relative;
+		}
+		.showPic img{
+			width: 600px;
+			float:left;
+			display:block;
+			position:absolute;
+		}
+		/*.showPic img:nth-child(1){
+			left:0px;
+		}
+		.showPic img:nth-child(2){
+			left:120px;
+		}
+		.showPic img:nth-child(3){
+			left:240px;
+		}
+		.showPic img:nth-child(4){
+			left:360px;
+		}
+		.showPic img:nth-child(5){
+			left:480px;
+		}
+		.showPic img:nth-child(6){
+			left:600px;
+		}*/
+	</style>
+</head>
+<body>
+	<div class="showPic">
+		<img src="../images/baiyechuang/1.jpg" alt="">
+		<img src="../images/baiyechuang/2.jpg" alt="">
+		<img src="../images/baiyechuang/3.jpg" alt="">
+		<img src="../images/baiyechuang/4.jpg" alt="">
+		<img src="../images/baiyechuang/5.jpg" alt="">
+		<img src="../images/baiyechuang/6.jpg" alt="">
+	</div>
+</body>
+	<script src="../js/jquery-3.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			var num=$(".showPic img").length;
+			console.log(num);
+			var width=($(".showPic").width()-$(".showPic img").width())/(num-1);
+			console.log(width);
+			var chuShi=$(".showPic").width()/num;
+			console.log(chuShi);
+			for(var i=0;i<num;i++){
+				$(".showPic img").eq(i).stop().animate({"left":chuShi*i},500)
+			}
+			$(".showPic img").hover(function(){
+				var ind=$(this).index();
+				console.log(ind);
+				for(var i=0;i<num;i++){
+					if(i<=ind){
+						$(".showPic img").eq(i).stop().animate({"left":width*i},500)
+					}else{
+						$(".showPic img").eq(i).stop().animate({"left":width*(i-1)+$(this).width()},500)
+					}
+					}
+				},function(){
+					for(var i=0;i<num;i++){
+						$(".showPic img").eq(i).stop().animate({"left":chuShi*i},500)
+					}
+			})
+		})
+	</script>
+</html>
